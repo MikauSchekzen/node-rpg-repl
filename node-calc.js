@@ -30,8 +30,22 @@ function roll(cmd) {
 };
 
 function defaultCommand(line) {
-	if(outputRaw) console.log(eval(line));
-	else eval(line);
+	if(outputRaw) {
+          try {
+            console.log(eval(line));
+          }
+          catch(err) {
+            console.error(err);
+          }
+        }
+	else {
+          try {
+            eval(line);
+          }
+          catch(err) {
+            console.error(err);
+          }
+        }
 };
 
 process.stdout.write("NodeJS RPG Dice Roller loaded.\n\n" + help.commands);
