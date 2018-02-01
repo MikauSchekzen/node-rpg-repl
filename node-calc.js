@@ -5,13 +5,25 @@ const readline = require("readline");
 
 var outputRaw = true;
 var help = {
-	basic: "Define what you want help with.\n\n" +
-		"'help commands' - List special commands\n" +
-		"\n",
-	commands: "Possible commands (next to default JS and NodeJS ones):\n" +
-		"=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" +
-		"'roll <cmd>' - Replace <cmd> with something like '1d6' or '2d10+15'\n\n"
+    basic: "Define what you want help with.\n\n" +
+        "'help commands' - List special commands\n" +
+        "\n",
+    commands: "Possible commands (next to default JS and NodeJS ones):\n" +
+        getSeparatorLine() + "\n" +
+        "'roll <cmd>' - Replace <cmd> with something like '1d6' or '2d10+15'\n\n"
 };
+
+function getSeparatorLine() {
+    let a = 0;
+    let cols = process.stdout.columns;
+    let str = "";
+    while(a < cols) {
+        if(a % 2 === 0) str += "=";
+        else str += "-"
+        a++
+    }
+    return str;
+}
 
 function showHelp(about) {
 	if(about === "basic") {
@@ -23,10 +35,10 @@ function showHelp(about) {
 };
 
 function roll(cmd) {
-  outputRaw = false;
-  lastRoll = dice.roll(cmd);
-  console.log(lastRoll.toString());
-	outputRaw = true;
+    outputRaw = false;
+    lastRoll = dice.roll(cmd);
+    console.log(lastRoll.toString());
+    outputRaw = true;
 };
 
 function defaultCommand(line) {
@@ -50,7 +62,7 @@ function defaultCommand(line) {
 
 process.stdout.write("NodeJS RPG Dice Roller loaded.\n\n" + help.commands);
 
-var rl = readline.createInterface({
+let rl = readline.createInterface({
 	input: process.stdin,
 	output: process.stdout
 });
