@@ -79,7 +79,7 @@ rl.on("line", function(line) {
 	else if(line.match(/^HELP[ ]([a-zA-Z0-9]+)$/i)) {
 		showHelp(RegExp.$1);
 	}
-	else if(line.match(/^R(?:OLL)?[ ]([0-9d\+\-\*\/]+)$/i)) {
+	else if(line.match(/^R(?:OLL)?[ ](.+)$/i)) {
 		roll(RegExp.$1);
 	}
 	else defaultCommand(line);
