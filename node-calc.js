@@ -3,6 +3,8 @@ var dice = new dr.DiceRoller();
 var lastRoll = null;
 const readline = require("readline");
 
+process.stdout.write("\033c");
+
 var outputRaw = true;
 var help = {
     basic: "Define what you want help with.\n\n" +
