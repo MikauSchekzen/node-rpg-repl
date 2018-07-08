@@ -96,7 +96,7 @@ function pasteFromClipboard() {
     rl.write(content);
 };
 
-process.stdout.write("NodeJS RPG Dice Roller loaded.\n\n" + help.commands);
+process.stdout.write("NodeJS RPG Dice Roller loaded.\n\n");
 
 let rl = readline.createInterface({
     input: process.stdin,
