@@ -4,6 +4,8 @@ var lastRoll = null;
 const readline = require("readline");
 const clipboard = require("clipboardy");
 
+require("./utils");
+
 process.stdout.write("\033c");
 
 var outputRaw = true;
