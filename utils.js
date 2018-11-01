@@ -34,14 +34,14 @@ Array.prototype.max = function() {
       from: ["feet", "ft"],
       to: ["inch", "inches"],
       calc: function(value) {
-        return value / 12;
+        return value * 12;
       }
     },
     {
       from: ["inch", "inches"],
       to: ["feet", "ft"],
       calc: function(value) {
-        return value * 12;
+        return value / 12;
       }
     }
   ];
