@@ -2,5 +2,8 @@
   "name": "node-calc",
   "dependencies": {
     "clipboardy": "^1.2.3"
+  },
+  "bin": {
+    "node-calc": "./bin/node-calc.js"
   }
 }
