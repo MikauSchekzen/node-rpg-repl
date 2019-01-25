@@ -1,6 +1,6 @@
 const dr = require("./dice-roller.js");
-var dice = new dr.DiceRoller();
-var lastRoll = null;
+let dice = new dr.DiceRoller();
+let lastRoll = null;
 const readline = require("readline");
 const clipboard = require("clipboardy");
 
@@ -8,9 +8,15 @@ require("./utils");
 
 clearTerminal();
 
-var outputRaw = true;
-var lastResult = "";
-var help = {
+let colorTerms = [
+  "xterm",
+  "xterm-256color",
+  "xterm-termite"
+];
+let hasColors = (process.env.TERM != null && colorTerms.indexOf(process.env.TERM >= 0));
+let outputRaw = true;
+let lastResult = "";
+let help = {
   basic: "Define what you want help with.\n\n" +
   "'help commands' - List special commands\n" +
   "\n",
@@ -18,6 +24,9 @@ var help = {
   getSeparatorLine() + "\n" +
   "'roll <cmd>' - Replace <cmd> with something like '1d6' or '2d10+15'\n\n"
 };
+let ps1 = "> ";
+if(hasColors)
+  ps1 = "\033[1;31m" + ps1 + "\033[0m";
 
 function clearTerminal() {
   process.stdout.write("\033c");
@@ -42,7 +51,7 @@ function showHelp(about) {
   else if(about.match(/(?:COMMANDS?|CMDS?)/i)) {
     process.stdout.write(help.commands);
   }
-};
+}
 
 function roll(cmd) {
   // Don't output this raw
@@ -55,7 +64,7 @@ function roll(cmd) {
   lastResult = lastRoll.getTotal().toString();
   // Revert to raw outputting
   outputRaw = true;
-};
+}
 
 function defaultCommand(line) {
   if(outputRaw) {
@@ -78,7 +87,7 @@ function defaultCommand(line) {
       console.error(err);
     }
   }
-};
+}
 
 function handleKeyPress(key, ev) {
   if(ev.ctrl) {
@@ -91,16 +100,16 @@ function handleKeyPress(key, ev) {
       pasteFromClipboard();
     }
   }
-};
+}
 
 function copyToClipboard() {
   clipboard.write(lastResult);
-};
+}
 
 function pasteFromClipboard() {
-  var content = clipboard.readSync();
+  let content = clipboard.readSync();
   rl.write(content);
-};
+}
 
 process.stdout.write("NodeJS RPG Dice Roller loaded.\n\n");
 
@@ -113,6 +122,9 @@ rl.input.on("keypress", handleKeyPress);
 
 // Disable SIGINT
 rl.on("SIGINT", function() {});
+
+// Set prompt
+rl.setPrompt(ps1);
 
 rl.prompt();
 

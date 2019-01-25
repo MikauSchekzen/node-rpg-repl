@@ -1,4 +1,10 @@
+# Sublime projects
 *.sublime-*
+
+# Node modules
 node_modules
+
+# Start scripts
 /start.bat
 /start.sh
+/.vimrc

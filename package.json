@@ -5,5 +5,8 @@
   },
   "bin": {
     "node-calc": "./bin/node-calc.js"
+  },
+  "scripts": {
+    "test": "./bin/node-calc.js"
   }
 }
