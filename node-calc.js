@@ -73,7 +73,9 @@ function defaultCommand(line) {
       if(typeof lastResult === "number") {
         lastResult = lastResult.toString();
       }
-      console.log(lastResult);
+      if(lastResult != null) {
+        console.log(lastResult);
+      }
     }
     catch(err) {
       console.error(err);
